@@ -52,6 +52,17 @@ const Checkout = (props) => {
 	const confirmHandler = (event) => {
 		event.preventDefault();
 
+		if (formIsValid) {
+			return;
+		}
+
+		props.onConfirm({
+			name: inputName,
+			steet: inputStreet,
+			city: inputCity,
+			postalCode: inputPostal,
+		});
+
 		nameReset();
 		streetReset();
 		postalReset();
