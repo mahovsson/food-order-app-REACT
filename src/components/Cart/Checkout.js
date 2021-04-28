@@ -52,7 +52,12 @@ const Checkout = (props) => {
 	const confirmHandler = (event) => {
 		event.preventDefault();
 
-		if (formIsValid) {
+		if (
+			!inputNameIsValid &&
+			!inputStreet &&
+			!inputPostalIsValid &&
+			inputCityIsValid
+		) {
 			return;
 		}
 
