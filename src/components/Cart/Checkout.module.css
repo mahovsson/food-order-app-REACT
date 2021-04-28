@@ -38,6 +38,15 @@
 	padding: 0.5rem 2rem;
 }
 
+button:disabled,
+button:disabled:hover,
+button:disabled:focus {
+	background-color: #ccc;
+	color: #292929;
+	background-color: #ccc;
+	cursor: not-allowed;
+}
+
 .actions button:hover,
 .actions button:active {
 	background-color: #ffe6dc;
@@ -61,4 +70,8 @@
 .invalid input {
 	border-color: #aa0b20;
 	background-color: #ffeff1;
+}
+
+.error {
+	color: red;
 }
