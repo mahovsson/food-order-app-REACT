@@ -7,13 +7,18 @@ import Card from '../UI/Card';
 const AvaliableMeals = () => {
 	const [meals, setMeals] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState('');
+	const [error, setError] = useState();
 
 	const fetchData = async () => {
 		setIsLoading(true);
 		let response = await fetch(
 			'https://food-order-app-3b76f-default-rtdb.europe-west1.firebasedatabase.app/meals.json'
 		);
+
+		if (!response.ok) {
+			throw new Error('Something went wrong!!!');
+		}
+
 		let data = await response.json();
 		let transformedData = [];
 
@@ -30,13 +35,24 @@ const AvaliableMeals = () => {
 	};
 
 	useEffect(() => {
-		fetchData();
+		fetchData().catch((error) => {
+			setIsLoading(false);
+			setError(error.message);
+		});
 	}, []);
 
 	if (isLoading) {
 		return (
 			<section className={classes['meal-loading']}>
 				<p>Loading...</p>
+			</section>
+		);
+	}
+
+	if (error) {
+		return (
+			<section className={classes.error}>
+				<p>{error}</p>
 			</section>
 		);
 	}
